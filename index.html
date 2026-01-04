@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT System Soulution - Startseite</title>
+  <style>
+    :root {
+      /* Colors */
+      --color-primary: #be185d;
+      --color-secondary: #ec4899;
+      --color-accent: #06b6d4;
+      --color-bg: #fdf2f8;
+      --color-text: #831843;
+      --color-white: #ffffff;
+      
+      /* Fonts */
+      --font-heading: 'Sora', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      
+      /* Layout */
+      --border-radius: 20px;
+      --container-width: 1200px;
+      --spacing-sm: 1rem;
+      --spacing-md: 2rem;
+      --spacing-lg: 4rem;
+      --spacing-xl: 8rem;
+      
+      /* Shadows */
+      --shadow-glow: 0 0 20px rgba(190, 24, 93, 0.4);
+      --shadow-card: 0 10px 30px rgba(131, 24, 67, 0.1);
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(190, 24, 93, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
+  <style>
+    .nav-wrapper {
+      background-color: var(--color-primary);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-white);
+      letter-spacing: -0.5px;
+    }
+    
+    .logo span {
+      color: var(--color-accent);
+    }
+    
+    .desktop-menu {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-link {
+      color: var(--color-white);
+      font-weight: 700;
+      font-size: 1rem;
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      color: var(--color-accent);
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Mobile Menu Logic via Checkbox Hack */
+    #nav-toggle {
+      display: none;
+    }
+    
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    
+    .hamburger span {
+      width: 30px;
+      height: 3px;
+      background-color: var(--color-white);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(131, 24, 67, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+    
+    .mobile-link {
+      color: var(--color-white);
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    /* Hamburger Animation State */
+    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(2) {
+      opacity: 0;
+    }
+    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    #nav-toggle:checked ~ .mobile-menu-overlay {
+      right: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .desktop-menu { display: none; }
+      .hamburger { display: flex; }
+    }
+  </style>
+
+  <header class="nav-wrapper">
+    <input type="checkbox" id="nav-toggle">
+    
+    <div class="nav-container">
+      <a href="index.html" class="logo">IT System <span>Soulution</span></a>
+      
+      <nav class="desktop-menu">
+        <a href="index.html" class="nav-link">Startseite</a>
+        <a href="ueber-uns.html" class="nav-link">Über uns</a>
+        <a href="leistungen.html" class="nav-link">Leistungen</a>
+        <a href="kontakt.html" class="nav-link">Kontakt</a>
+      </nav>
+      
+      <label for="nav-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+
+    <div class="mobile-menu-overlay">
+      <nav class="mobile-menu-links">
+        <a href="index.html" class="mobile-link">Startseite</a>
+        <a href="ueber-uns.html" class="mobile-link">Über uns</a>
+        <a href="leistungen.html" class="mobile-link">Leistungen</a>
+        <a href="kontakt.html" class="mobile-link">Kontakt</a>
+        <a href="impressum.html" class="mobile-link">Impressum</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <style>
+    .hero-section {
+      position: relative;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #9d174d 100%);
+      padding: 8rem 2rem 12rem;
+      color: var(--color-white);
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-headline {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      margin-bottom: 1.5rem;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    .hero-subline {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 0.8s ease-out 0.2s backwards;
+    }
+    
+    .hero-btn-wrapper {
+      animation: fadeIn 0.8s ease-out 0.4s backwards;
+    }
+    
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 1;
+    }
+    
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: 150px;
+    }
+    
+    .hero-glow {
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+      opacity: 0.2;
+      pointer-events: none;
+    }
+  </style>
+
+  <section class="hero-section">
+    <div class="hero-glow"></div>
+    
+    <div class="hero-content">
+      <h1 class="hero-headline">Gemeinsam zum Erfolg</h1>
+      <p class="hero-subline">Ob groß oder klein – jedes Projekt verdient unsere volle Aufmerksamkeit. Überzeugen Sie sich selbst.</p>
+      <div class="hero-btn-wrapper">
+        <a href="kontakt.html" class="btn-primary">Kontakt aufnehmen</a>
+      </div>
+    </div>
+
+    <div class="hero-wave">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#fdf2f8"></path>
+      </svg>
+    </div>
+  </section>
+
+  <style>
+    .section-wrapper {
+      padding: var(--spacing-xl) 2rem;
+    }
+    
+    .section-container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+    
+    .section-title {
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .section-subtitle {
+      font-size: 2.5rem;
+      color: var(--color-text);
+    }
+  </style>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Ihr Ansprechpartner</span>
+        <h2 class="section-subtitle">Kompetenz und Engagement.</h2>
+      </div>
+      
+      <div class="section-content">
+        <!-- Card-Komponente für jeden Eintrag -->
+        <style>
+          .card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            border-radius: var(--border-radius);
+            padding: 3px; /* Width of the border */
+            background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+            background-size: 200% 200%;
+            animation: gradientMove 4s ease infinite;
+            transition: transform 0.3s ease;
+          }
+          
+          .card-wrapper:hover {
+            transform: scale(1.02);
+          }
+          
+          .card-inner {
+            background: #ffffff;
+            border-radius: 17px; /* 20px - 3px */
+            padding: 2.5rem 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+          }
+          
+          .card-icon-container {
+            width: 60px;
+            height: 60px;
+            min-height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 10px rgba(190, 24, 93, 0.2);
+          }
+          
+          .card-title {
+            font-size: 1.5rem;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+          }
+          
+          .card-desc {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+          }
+          
+          .card-link {
+            margin-top: auto;
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          }
+          
+          .card-link:hover {
+            color: var(--color-secondary);
+            gap: 0.8rem;
+          }
+        </style>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🚗
+            </div>
+            <div>
+              <h3 class="card-title">Projektmanagement</h3>
+              <p class="card-desc">Unser Team sorgt dafür, dass Ihre Projekte reibungslos und effizient ablaufen. Wir bieten maßgeschneiderte Lösungen für Ihre spezifischen Anforderungen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🔋
+            </div>
+            <div>
+              <h3 class="card-title">Technische Unterstützung</h3>
+              <p class="card-desc">Unsere Experten stehen Ihnen rund um die Uhr zur Verfügung, um technische Probleme schnell und effizient zu lösen. Vertrauen Sie auf unsere Erfahrung und Kompetenz.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🛠️
+            </div>
+            <div>
+              <h3 class="card-title">Softwareentwicklung</h3>
+              <p class="card-desc">Wir entwickeln Softwarelösungen, die perfekt auf Ihre Geschäftsanforderungen zugeschnitten sind. Von der Planung bis zur Umsetzung stehen wir Ihnen zur Seite.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📞
+            </div>
+            <div>
+              <h3 class="card-title">Kundensupport</h3>
+              <p class="card-desc">Unser Kundensupport-Team ist immer bereit, Ihnen bei Fragen und Anliegen zu helfen. Wir legen großen Wert auf Kundenzufriedenheit und schnelle Reaktionszeiten.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📧
+            </div>
+            <div>
+              <h3 class="card-title">Beratung</h3>
+              <p class="card-desc">Unsere Berater helfen Ihnen, die besten IT-Lösungen für Ihr Unternehmen zu finden. Wir analysieren Ihre Bedürfnisse und bieten Ihnen die optimalen Strategien an.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Schritt für Schritt</span>
+        <h2 class="section-subtitle">Sie wissen immer, woran Sie sind.</h2>
+      </div>
+      
+      <div class="section-content">
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📍
+            </div>
+            <div>
+              <h3 class="card-title">Analyse</h3>
+              <p class="card-desc">Wir beginnen mit einer gründlichen Analyse Ihrer aktuellen IT-Infrastruktur und Geschäftsprozesse, um Verbesserungspotenziale zu identifizieren.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📝
+            </div>
+            <div>
+              <h3 class="card-title">Planung</h3>
+              <p class="card-desc">Basierend auf der Analyse entwickeln wir einen detaillierten Plan, der auf Ihre spezifischen Bedürfnisse und Ziele abgestimmt ist.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🚀
+            </div>
+            <div>
+              <h3 class="card-title">Umsetzung</h3>
+              <p class="card-desc">Unser Team setzt den Plan in die Tat um, wobei wir sicherstellen, dass alle Lösungen nahtlos in Ihre bestehende Infrastruktur integriert werden.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🔍
+            </div>
+            <div>
+              <h3 class="card-title">Überprüfung</h3>
+              <p class="card-desc">Nach der Umsetzung überprüfen wir die Ergebnisse, um sicherzustellen, dass alle Ziele erreicht wurden und die Lösungen effektiv arbeiten.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Lassen Sie uns sprechen</span>
+        <h2 class="section-subtitle">Wir freuen uns auf Ihre Anfrage.</h2>
+      </div>
+      
+      <div class="section-content">
+        <a href="kontakt.html" class="btn-primary">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Unser Angebot</span>
+        <h2 class="section-subtitle">Kompetenz in allen Bereichen.</h2>
+      </div>
+      
+      <div class="section-content">
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🌐
+            </div>
+            <div>
+              <h3 class="card-title">Netzwerklösungen</h3>
+              <p class="card-desc">Wir bieten umfassende Netzwerklösungen, die sicherstellen, dass Ihre Systeme zuverlässig und effizient arbeiten.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              ☁️
+            </div>
+            <div>
+              <h3 class="card-title">Cloud-Dienste</h3>
+              <p class="card-desc">Unsere Cloud-Dienste ermöglichen es Ihnen, flexibel und skalierbar zu arbeiten, ohne Kompromisse bei der Sicherheit einzugehen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🔒
+            </div>
+            <div>
+              <h3 class="card-title">IT-Sicherheit</h3>
+              <p class="card-desc">Schützen Sie Ihr Unternehmen mit unseren umfassenden IT-Sicherheitslösungen vor Bedrohungen und Angriffen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🖥️
+            </div>
+            <div>
+              <h3 class="card-title">Hardwarelösungen</h3>
+              <p class="card-desc">Wir bieten eine breite Palette von Hardwarelösungen, die auf die spezifischen Anforderungen Ihres Unternehmens zugeschnitten sind.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📊
+            </div>
+            <div>
+              <h3 class="card-title">Datenanalyse</h3>
+              <p class="card-desc">Nutzen Sie die Macht der Datenanalyse, um fundierte Geschäftsentscheidungen zu treffen und Ihre Effizienz zu steigern.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🤝
+            </div>
+            <div>
+              <h3 class="card-title">Partnerschaften</h3>
+              <p class="card-desc">Wir arbeiten mit führenden Technologieanbietern zusammen, um Ihnen die besten Lösungen auf dem Markt zu bieten.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Unsere Stärken</span>
+        <h2 class="section-subtitle">Qualität, die überzeugt.</h2>
+      </div>
+      
+      <div class="section-content">
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🏆
+            </div>
+            <div>
+              <h3 class="card-title">Erfahrung</h3>
+              <p class="card-desc">Mit über 20 Jahren Erfahrung in der IT-Branche bieten wir Ihnen fundiertes Wissen und bewährte Lösungen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              📈
+            </div>
+            <div>
+              <h3 class="card-title">Innovation</h3>
+              <p class="card-desc">Wir setzen auf innovative Technologien und Ansätze, um Ihnen einen Wettbewerbsvorteil zu verschaffen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🤝
+            </div>
+            <div>
+              <h3 class="card-title">Kundenzufriedenheit</h3>
+              <p class="card-desc">Unsere Kunden stehen im Mittelpunkt unseres Handelns. Wir arbeiten eng mit Ihnen zusammen, um Ihre Erwartungen zu übertreffen.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+
+        <div class="card-wrapper">
+          <div class="card-inner">
+            <div class="card-icon-container">
+              🌍
+            </div>
+            <div>
+              <h3 class="card-title">Nachhaltigkeit</h3>
+              <p class="card-desc">Wir setzen auf nachhaltige IT-Lösungen, die sowohl umweltfreundlich als auch wirtschaftlich sind.</p>
+            </div>
+            <a href="leistungen.html" class="card-link">Mehr erfahren &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-wrapper">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-title">Unsere Stärken</span>
+        <h2 class="section-subtitle">Qualität, die überzeugt.</h2>
+      </div>
+      
+      <div class="section-content">
+        <a href="kontakt.html" class="btn-primary">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (PFLICHT - von unten kopieren) -->
+  <style>
+    .footer-wrapper {
+      background-color: var(--color-text);
+      color: var(--color-white);
+      padding: 4rem 2rem 2rem;
+      margin-top: 4rem;
+    }
+    
+    .footer-grid {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-col h4 {
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+      color: #e2e8f0;
+      font-size: 0.95rem;
+    }
+    
+    .footer-links a:hover {
+      color: var(--color-secondary);
+      padding-left: 5px;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .newsletter-input {
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      outline: none;
+    }
+    
+    .newsletter-input:focus {
+      border-color: var(--color-accent);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    
+    .social-icon:hover {
+      background: var(--color-primary);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+    }
+  </style>
+
+  <footer class="footer-wrapper">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>IT System Soulution</h4>
+        <p>Ihr Premium-Partner für Hardware-Integration und Software-Entwicklung. Wir transformieren digitale Landschaften.</p>
+        <div class="social-icons">
+          <a href="#" class="social-icon">IN</a>
+          <a href="#" class="social-icon">FB</a>
+          <a href="#" class="social-icon">X</a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Unternehmen</h4>
+        <ul class="footer-links">
+          <li><a href="ueber-uns.html">Über uns</a></li>
+          <li><a href="karriere.html">Karriere</a></li>
+          <li><a href="partner.html">Partner</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Expertise</h4>
+        <ul class="footer-links">
+          <li><a href="leistungen.html">Systemintegration</a></li>
+          <li><a href="leistungen.html">Cloud Computing</a></li>
+          <li><a href="leistungen.html">Cyber Security</a></li>
+          <li><a href="leistungen.html">Hardware Support</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Ihre E-Mail Adresse" class="newsletter-input">
+          <button type="button" class="btn-primary" style="width:100%">Anmelden</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      &copy; 2023 IT System Soulution. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
+    </div>
+  </footer>
+</body>
+</html>
