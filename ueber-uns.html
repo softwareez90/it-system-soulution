@@ -6,32 +6,25 @@
   <title>IT System Soulution - Über uns</title>
   <style>
     :root {
-      /* Colors */
-      --color-primary: #be185d;
-      --color-secondary: #ec4899;
-      --color-accent: #06b6d4;
-      --color-bg: #fdf2f8;
-      --color-text: #831843;
+      --color-primary: #7c2d12;
+      --color-secondary: #c2410c;
+      --color-accent: #0891b2;
+      --color-bg: #fff7ed;
+      --color-text: #431407;
       --color-white: #ffffff;
       
-      /* Fonts */
-      --font-heading: 'Sora', sans-serif;
-      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-heading: 'Oswald', sans-serif;
+      --font-body: 'Merriweather', serif;
       
-      /* Layout */
-      --border-radius: 20px;
-      --container-width: 1200px;
-      --spacing-sm: 1rem;
-      --spacing-md: 2rem;
-      --spacing-lg: 4rem;
-      --spacing-xl: 8rem;
+      --radius-default: 12px;
+      --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-glow: 0 0 20px rgba(124, 45, 18, 0.4);
       
-      /* Shadows */
-      --shadow-glow: 0 0 20px rgba(190, 24, 93, 0.4);
-      --shadow-card: 0 10px 30px rgba(131, 24, 67, 0.1);
+      --transition-fast: 0.2s ease;
+      --transition-smooth: 0.3s ease-in-out;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Merriweather:wght@300;400;700&display=swap');
 
     * {
       box-sizing: border-box;
@@ -39,60 +32,76 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: var(--font-body);
       background-color: var(--color-bg);
       color: var(--color-text);
+      font-family: var(--font-body);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
     h1, h2, h3, h4, h5, h6 {
       font-family: var(--font-heading);
+      text-transform: uppercase;
       font-weight: 700;
-      line-height: 1.2;
+      letter-spacing: 0.05em;
       margin-bottom: 1rem;
     }
 
     a {
       text-decoration: none;
       color: inherit;
-      transition: all 0.3s ease;
+      transition: var(--transition-fast);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .cards-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .cards-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     .btn-primary {
       display: inline-block;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      color: white;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+      color: var(--color-white);
+      padding: 1rem 2rem;
+      border-radius: var(--radius-default);
       font-family: var(--font-heading);
       font-weight: 600;
-      border-radius: var(--border-radius);
+      text-transform: uppercase;
+      letter-spacing: 1px;
       border: none;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 15px rgba(190, 24, 93, 0.3);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-glow);
-      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes gradientMove {
+    @keyframes gradient-bg {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -100,482 +109,425 @@
 
     @keyframes float {
       0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-20px); }
       100% { transform: translateY(0px); }
     }
 
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .nav-wrapper {
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .main-nav {
       background-color: var(--color-primary);
+      padding: 1.25rem 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
-    
+
     .nav-container {
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .logo {
       font-family: var(--font-heading);
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--color-white);
-      letter-spacing: -0.5px;
+      letter-spacing: 1px;
     }
-    
-    .logo span {
+
+    .logo .highlight {
       color: var(--color-accent);
     }
-    
-    .desktop-menu {
+
+    .nav-links {
       display: flex;
       gap: 2rem;
+      list-style: none;
+      align-items: center;
     }
-    
-    .nav-link {
+
+    .nav-links a {
       color: var(--color-white);
-      font-weight: 700;
+      font-family: var(--font-heading);
+      font-weight: 600;
       font-size: 1rem;
-      position: relative;
+      text-transform: uppercase;
     }
-    
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background-color: var(--color-accent);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-link:hover {
+
+    .nav-links a:hover {
       color: var(--color-accent);
     }
-    
-    .nav-link:hover::after {
-      width: 100%;
+
+    .nav-cta {
+      border: 1px solid var(--color-accent);
+      padding: 0.5rem 1.5rem;
+      border-radius: var(--radius-default);
+      transition: 0.3s;
     }
-    
-    #nav-toggle {
-      display: none;
+
+    .nav-cta:hover {
+      background: var(--color-accent);
+      color: var(--color-white) !important;
     }
-    
+
     .hamburger {
       display: none;
-      flex-direction: column;
-      gap: 6px;
       cursor: pointer;
       z-index: 1002;
     }
-    
-    .hamburger span {
+
+    .line {
       width: 30px;
       height: 3px;
-      background-color: var(--color-white);
-      border-radius: 3px;
-      transition: all 0.3s ease;
+      background: var(--color-white);
+      margin: 6px 0;
+      transition: 0.3s ease;
+      border-radius: 2px;
     }
-    
-    .mobile-menu-overlay {
+
+    .mobile-menu {
       position: fixed;
       top: 0;
-      right: -100%;
-      width: 100%;
+      right: 0;
       height: 100vh;
-      background: rgba(131, 24, 67, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      width: 80%;
+      max-width: 400px;
+      background: rgba(124, 45, 18, 0.95);
+      backdrop-filter: blur(15px);
+      transform: translateX(100%);
+      transition: 0.3s ease;
       z-index: 1001;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      justify-content: center;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.3);
     }
-    
-    .mobile-menu-links {
+
+    .mobile-menu-content {
       display: flex;
       flex-direction: column;
       gap: 2rem;
       text-align: center;
     }
-    
-    .mobile-link {
-      color: var(--color-white);
+
+    .mobile-menu-content a {
       font-family: var(--font-heading);
       font-size: 1.5rem;
+      color: var(--color-white);
       font-weight: 700;
+      text-transform: uppercase;
     }
-    
-    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
+
+    .mobile-menu-content a:hover {
+      color: var(--color-accent);
     }
-    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(2) {
+
+    @media (max-width: 768px) {
+      .desktop-only {
+        display: none;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    body.nav-open .mobile-menu {
+      transform: translateX(0);
+    }
+
+    body.nav-open .line-1 {
+      transform: rotate(-45deg) translate(-6px, 7px);
+    }
+    body.nav-open .line-2 {
       opacity: 0;
     }
-    #nav-toggle:checked ~ .nav-container .hamburger span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
-    #nav-toggle:checked ~ .mobile-menu-overlay {
-      right: 0;
-    }
-    
-    @media (max-width: 768px) {
-      .desktop-menu { display: none; }
-      .hamburger { display: flex; }
+    body.nav-open .line-3 {
+      transform: rotate(45deg) translate(-6px, -7px);
     }
 
-    .footer-wrapper {
-      background-color: var(--color-text);
-      color: var(--color-white);
-      padding: 4rem 2rem 2rem;
-      margin-top: 4rem;
-    }
-    
-    .footer-grid {
-      max-width: var(--container-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    
-    .footer-col h4 {
-      color: var(--color-accent);
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
-    }
-    
-    .footer-links {
-      list-style: none;
-    }
-    
-    .footer-links li {
-      margin-bottom: 0.8rem;
-    }
-    
-    .footer-links a {
-      color: #e2e8f0;
-      font-size: 0.95rem;
-    }
-    
-    .footer-links a:hover {
-      color: var(--color-secondary);
-      padding-left: 5px;
-    }
-    
-    .newsletter-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .newsletter-input {
-      padding: 0.8rem;
-      border-radius: 10px;
-      border: 2px solid transparent;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      outline: none;
-    }
-    
-    .newsletter-input:focus {
-      border-color: var(--color-accent);
-    }
-    
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    
-    .social-icon {
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-    
-    .social-icon:hover {
-      background: var(--color-primary);
-    }
-    
-    .copyright {
+    .site-footer {
+      background-color: var(--color-bg);
+      padding: 4rem 0 2rem;
       text-align: center;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(124, 45, 18, 0.1);
     }
 
-    .section-wrapper {
-      padding: var(--spacing-xl) 2rem;
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--color-primary);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
     }
-    
-    .section-container {
-      max-width: var(--container-width);
-      margin: 0 auto;
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-    
+
+    .footer-nav a {
+      color: var(--color-text);
+      font-weight: 500;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .footer-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-secondary);
+      transition: 0.3s;
+    }
+
+    .footer-nav a:hover::after {
+      width: 100%;
+    }
+
+    .footer-contact a {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .copyright {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: rgba(67, 20, 7, 0.6);
+    }
+
+    .content-section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
     .section-header {
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto 4rem;
-    }
-    
-    .section-title {
-      color: var(--color-primary);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      display: block;
-    }
-    
-    .section-subtitle {
-      font-size: 2.5rem;
-      color: var(--color-text);
+      margin-bottom: 4rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .card-wrapper {
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--color-primary);
       position: relative;
-      width: 100%;
-      max-width: 380px;
-      border-radius: var(--border-radius);
-      padding: 3px;
-      background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-secondary));
-      background-size: 200% 200%;
-      animation: gradientMove 4s ease infinite;
-      transition: transform 0.3s ease;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
-    
-    .card-wrapper:hover {
-      transform: scale(1.02);
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--color-accent);
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
     }
-    
-    .card-inner {
-      background: #ffffff;
-      border-radius: 17px;
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--color-text);
+      opacity: 0.8;
+    }
+
+    .content-section.dark-mode {
+      background-color: var(--color-primary);
+    }
+    .content-section.dark-mode .section-title {
+      color: var(--color-white);
+    }
+    .content-section.dark-mode .section-subtitle {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: var(--radius-default);
       padding: 2.5rem 2rem;
-      height: 100%;
+      transition: var(--transition-smooth);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 1.5rem;
+      height: 100%;
+      box-shadow: 0 8px 32px 0 rgba(124, 45, 18, 0.1);
     }
-    
-    .card-icon-container {
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(15px);
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 15px 40px 0 rgba(124, 45, 18, 0.15);
+    }
+
+    .card-icon-wrapper {
       width: 60px;
       height: 60px;
-      min-height: 60px;
       border-radius: 12px;
       background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      color: white;
-      box-shadow: 0 4px 10px rgba(190, 24, 93, 0.2);
-    }
-    
-    .card-title {
+      margin-bottom: 1.5rem;
+      color: var(--color-white);
       font-size: 1.5rem;
-      color: var(--color-text);
-      margin-bottom: 0.5rem;
+      box-shadow: 0 4px 15px rgba(124, 45, 18, 0.3);
     }
     
-    .card-desc {
-      font-size: 1rem;
-      color: #666;
-      line-height: 1.6;
+    .card-icon-wrapper svg {
+      width: 30px;
+      height: 30px;
+      fill: white;
     }
-    
-    .card-link {
-      margin-top: auto;
+
+    .card-title {
       color: var(--color-primary);
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
-    
-    .card-link:hover {
-      color: var(--color-secondary);
-      gap: 0.8rem;
+
+    .card-description {
+      color: var(--color-text);
+      font-size: 1rem;
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
   <!-- NAVIGATION (PFLICHT - von unten kopieren) -->
-  <header class="nav-wrapper">
-    <input type="checkbox" id="nav-toggle">
-    
-    <div class="nav-container">
-      <a href="index.html" class="logo">IT System <span>Soulution</span></a>
+  <nav class="main-nav">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">IT SYSTEM <span class="highlight">SOULUTION</span></a>
       
-      <nav class="desktop-menu">
-        <a href="index.html" class="nav-link">Startseite</a>
-        <a href="ueber-uns.html" class="nav-link">Über uns</a>
-        <a href="leistungen.html" class="nav-link">Leistungen</a>
-        <a href="kontakt.html" class="nav-link">Kontakt</a>
-      </nav>
-      
-      <label for="nav-toggle" class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
+      <!-- Desktop Menu -->
+      <ul class="nav-links desktop-only">
+        <li><a href="index.html">Startseite</a></li>
+        <li><a href="ueber-uns.html">Über Uns</a></li>
+        <li><a href="leistungen.html">Leistungen</a></li>
+        <li><a href="kontakt.html" class="nav-cta">Kontakt</a></li>
+      </ul>
+
+      <!-- Mobile Hamburger -->
+      <div class="hamburger" onclick="document.body.classList.toggle('nav-open')">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+      </div>
     </div>
 
-    <div class="mobile-menu-overlay">
-      <nav class="mobile-menu-links">
-        <a href="index.html" class="mobile-link">Startseite</a>
-        <a href="ueber-uns.html" class="mobile-link">Über uns</a>
-        <a href="leistungen.html" class="mobile-link">Leistungen</a>
-        <a href="kontakt.html" class="mobile-link">Kontakt</a>
-        <a href="impressum.html" class="mobile-link">Impressum</a>
-      </nav>
+    <!-- Mobile Overlay -->
+    <div class="mobile-menu">
+      <div class="mobile-menu-content">
+        <a href="index.html" onclick="document.body.classList.remove('nav-open')">Startseite</a>
+        <a href="ueber-uns.html" onclick="document.body.classList.remove('nav-open')">Über Uns</a>
+        <a href="leistungen.html" onclick="document.body.classList.remove('nav-open')">Leistungen</a>
+        <a href="kontakt.html" onclick="document.body.classList.remove('nav-open')">Kontakt</a>
+        <a href="impressum.html" onclick="document.body.classList.remove('nav-open')">Impressum</a>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- MAIN CONTENT -->
-  <section class="section-wrapper">
-    <div class="section-container">
+  <section class="content-section">
+    <div class="container">
       <div class="section-header">
-        <span class="section-title">Über uns</span>
-        <h2 class="section-subtitle">Lernen Sie das Team kennen, das hinter unserem Erfolg steht.</h2>
+        <h2 class="section-title">Über uns</h2>
+        <p class="section-subtitle">Entdecken Sie, wer wir sind und wofür wir stehen.</p>
       </div>
-      
       <div class="section-content">
-        <h3>Firmengeschichte</h3>
-        <p>IT System Soulution wurde im Jahr 2005 von einer Gruppe visionärer IT-Experten gegründet, die eine Leidenschaft für Technologie und Innovation teilten. Die Gründungsidee war es, Unternehmen dabei zu unterstützen, ihre IT-Infrastruktur zu optimieren und maßgeschneiderte Softwarelösungen zu entwickeln, die ihren spezifischen Bedürfnissen entsprechen.</p>
-        <p>In den ersten Jahren konzentrierten wir uns auf den lokalen Markt und bauten ein solides Fundament auf. Mit der Zeit expandierten wir und gewannen Kunden aus verschiedenen Branchen, die von unserer Expertise und unserem Engagement für Qualität profitierten. Unsere Fähigkeit, komplexe Projekte termingerecht und innerhalb des Budgets abzuschließen, verschaffte uns einen hervorragenden Ruf in der Branche.</p>
-        <p>Ein bedeutender Meilenstein war die Einführung unserer Cloud-Computing-Dienste im Jahr 2012, die es unseren Kunden ermöglichten, ihre Daten sicher und effizient zu verwalten. Im Jahr 2018 wurden wir als einer der führenden Anbieter von Cyber-Security-Lösungen ausgezeichnet, was unser Engagement für die Sicherheit unserer Kunden unterstreicht.</p>
-        <p>Unsere Zukunftsvision ist es, weiterhin an der Spitze der technologischen Innovation zu stehen und unseren Kunden die besten Lösungen zu bieten, um ihre Geschäftsziele zu erreichen. Wir sind bestrebt, unsere Dienstleistungen kontinuierlich zu verbessern und neue Technologien zu integrieren, um den sich ständig ändernden Anforderungen des Marktes gerecht zu werden.</p>
-        
-        <h3>Unsere Philosophie</h3>
-        <div class="card-wrapper">
-          <div class="card-inner">
-            <div class="card-icon-container">
-              🚀
-            </div>
-            <div>
-              <h3 class="card-title">Innovation</h3>
-              <p class="card-desc">Wir streben danach, stets die neuesten Technologien zu nutzen, um innovative Lösungen für unsere Kunden zu entwickeln.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-wrapper">
-          <div class="card-inner">
-            <div class="card-icon-container">
-              🤝
-            </div>
-            <div>
-              <h3 class="card-title">Kundenorientierung</h3>
-              <p class="card-desc">Unsere Kunden stehen im Mittelpunkt unseres Handelns. Wir hören zu und entwickeln Lösungen, die ihren Bedürfnissen entsprechen.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-wrapper">
-          <div class="card-inner">
-            <div class="card-icon-container">
-              🌍
-            </div>
-            <div>
-              <h3 class="card-title">Nachhaltigkeit</h3>
-              <p class="card-desc">Wir sind bestrebt, umweltfreundliche Praktiken zu fördern und nachhaltige Lösungen zu entwickeln.</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-wrapper">
-          <div class="card-inner">
-            <div class="card-icon-container">
-              📈
-            </div>
-            <div>
-              <h3 class="card-title">Wachstum</h3>
-              <p class="card-desc">Wir fördern das Wachstum unserer Mitarbeiter und unseres Unternehmens durch kontinuierliche Weiterbildung und Innovation.</p>
-            </div>
-          </div>
-        </div>
+        <p>IT System Soulution ist ein führender Anbieter von Hardware- und Softwarelösungen. Wir bieten innovative Technologien und maßgeschneiderte Lösungen, die auf die individuellen Bedürfnisse unserer Kunden zugeschnitten sind. Unser Unternehmen zeichnet sich durch hohe Qualität, Zuverlässigkeit und exzellenten Kundenservice aus. Wir setzen auf nachhaltige Praktiken und fördern eine Kultur der Innovation und Zusammenarbeit.</p>
+      </div>
+    </div>
+  </section>
 
-        <h3>Unser Team</h3>
-        <p>Unser Team besteht aus hochqualifizierten Fachleuten, die sich leidenschaftlich für Technologie und Innovation einsetzen. Jeder von ihnen bringt einzigartige Fähigkeiten und Erfahrungen mit, die uns helfen, die besten Lösungen für unsere Kunden zu entwickeln.</p>
-        <p>Max Mustermann, CEO - Max ist der Gründer und treibende Kraft hinter IT System Soulution. Mit über 20 Jahren Erfahrung in der IT-Branche leitet er das Unternehmen mit Weitsicht und Engagement.</p>
-        <p>Anna Müller, CTO - Anna ist verantwortlich für die technische Strategie und die Leitung unseres Entwicklungsteams. Sie ist eine Expertin in Softwareentwicklung und Cloud-Technologien.</p>
-        <p>John Doe, Head of Sales - John leitet unser Vertriebsteam und ist verantwortlich für die Geschäftsentwicklung und Kundenbeziehungen. Er hat eine Leidenschaft für den Aufbau starker Partnerschaften.</p>
-        
-        <div class="section-header">
-          <a href="kontakt.html" class="btn-primary">Kontaktieren Sie uns</a>
-        </div>
+  <section class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Unsere Philosophie</h2>
+      </div>
+      <div class="cards-grid">
+        <article class="glass-card">
+          <div class="card-icon-wrapper">🌟</div>
+          <h3 class="card-title">Qualität</h3>
+          <p class="card-description">Wir legen großen Wert auf die Qualität unserer Produkte und Dienstleistungen, um die Erwartungen unserer Kunden stets zu übertreffen.</p>
+        </article>
+        <article class="glass-card">
+          <div class="card-icon-wrapper">🔒</div>
+          <h3 class="card-title">Zuverlässigkeit</h3>
+          <p class="card-description">Unsere Lösungen sind darauf ausgelegt, zuverlässig und sicher zu funktionieren, um das Vertrauen unserer Kunden zu gewinnen und zu bewahren.</p>
+        </article>
+        <article class="glass-card">
+          <div class="card-icon-wrapper">💬</div>
+          <h3 class="card-title">Kundenservice</h3>
+          <p class="card-description">Wir bieten einen hervorragenden Kundenservice, der auf die Bedürfnisse und Wünsche unserer Kunden eingeht.</p>
+        </article>
+        <article class="glass-card">
+          <div class="card-icon-wrapper">🌱</div>
+          <h3 class="card-title">Nachhaltigkeit</h3>
+          <p class="card-description">Nachhaltigkeit ist ein zentraler Bestandteil unserer Unternehmensphilosophie, und wir streben danach, umweltfreundliche Lösungen zu bieten.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Kontaktieren Sie uns</h2>
+      </div>
+      <div class="section-content" style="text-align: center;">
+        <a href="kontakt.html" class="btn-primary">Kontakt</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER (PFLICHT - von unten kopieren) -->
-  <footer class="footer-wrapper">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>IT System Soulution</h4>
-        <p>Ihr Premium-Partner für Hardware-Integration und Software-Entwicklung. Wir transformieren digitale Landschaften.</p>
-        <div class="social-icons">
-          <a href="#" class="social-icon">IN</a>
-          <a href="#" class="social-icon">FB</a>
-          <a href="#" class="social-icon">X</a>
-        </div>
-      </div>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">IT System Soulution</div>
       
-      <div class="footer-col">
-        <h4>Unternehmen</h4>
-        <ul class="footer-links">
-          <li><a href="ueber-uns.html">Über uns</a></li>
-          <li><a href="karriere.html">Karriere</a></li>
-          <li><a href="partner.html">Partner</a></li>
-          <li><a href="kontakt.html">Kontakt</a></li>
-        </ul>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="ueber-uns.html">Über Uns</a>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+      </nav>
+
+      <div class="footer-contact">
+        <a href="mailto:termin@it-systems-soulution.de">termin@it-systems-soulution.de</a>
       </div>
-      
-      <div class="footer-col">
-        <h4>Expertise</h4>
-        <ul class="footer-links">
-          <li><a href="leistungen.html">Systemintegration</a></li>
-          <li><a href="leistungen.html">Cloud Computing</a></li>
-          <li><a href="leistungen.html">Cyber Security</a></li>
-          <li><a href="leistungen.html">Hardware Support</a></li>
-        </ul>
+
+      <div class="copyright">
+        &copy; 2023 IT System Soulution. Alle Rechte vorbehalten.
       </div>
-      
-      <div class="footer-col">
-        <h4>Newsletter</h4>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Ihre E-Mail Adresse" class="newsletter-input">
-          <button type="button" class="btn-primary" style="width:100%">Anmelden</button>
-        </form>
-      </div>
-    </div>
-    
-    <div class="copyright">
-      &copy; 2023 IT System Soulution. Alle Rechte vorbehalten. | <a href="impressum.html">Impressum</a> | <a href="datenschutz.html">Datenschutz</a>
     </div>
   </footer>
 </body>
